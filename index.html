@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script src="js/my-engine.js"></script>
+
+
+<script>
+
+    var rotor1 = new ENIGMA.Rotor('I');
+    var rotor2 = new ENIGMA.Rotor('II');
+    var rotor3 = new ENIGMA.Rotor('III');
+
+    letter = 'B';
+
+    l = rotor1.encrypt(letter);
+    l = rotor2.encrypt(l);
+    l = rotor3.encrypt(l);
+    l = ENIGMA.reflector(l);
+    l = rotor3.decrypt(l);
+    l = rotor2.decrypt(l);
+    l = rotor1.decrypt(l);
+
+    console.log(letter+" becomes "+l);
+
+
+</script>
