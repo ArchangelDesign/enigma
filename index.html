@@ -14,21 +14,16 @@
 
 <script>
 
-    var rotor1 = new ENIGMA.Rotor('I');
-    var rotor2 = new ENIGMA.Rotor('II');
-    var rotor3 = new ENIGMA.Rotor('III');
+    machine = ENIGMA.machine('I', 'II', 'III');
+    machine.setRotorsPosition('A', 'A', 'A');
+    l1 = machine.encrypt('A');
+    l2 = machine.encrypt('A');
+    l3 = machine.encrypt('A');
 
-    letter = 'B';
+    machine.setRotorsPosition('A', 'A', 'A');
+    d1 = machine.encrypt(l1);
+    d2 = machine.encrypt(l2);
+    d3 = machine.encrypt(l3);
 
-    l = rotor1.encrypt(letter);
-    l = rotor2.encrypt(l);
-    l = rotor3.encrypt(l);
-    l = ENIGMA.reflector(l);
-    l = rotor3.decrypt(l);
-    l = rotor2.decrypt(l);
-    l = rotor1.decrypt(l);
-
-    console.log(letter+" becomes "+l);
-
-
+    console.log(d1 + ' - ' + d2 + ' - ' + d3);
 </script>

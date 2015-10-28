@@ -220,6 +220,11 @@ ENIGMA.getRotorConnections = function(type) {
         'Z' : 'J'
     };
 
+    switch (type) {
+      case 'I': return rotorI;
+      case 'II': return rotorII;
+      case 'III' : return rotorIII;
+    }
     return rotorI;
 };
 
@@ -293,6 +298,10 @@ ENIGMA.Rotor = function (type)
 
 
     this.step = function () {
+      var result = false;
+      if (ENIGMA.getRotorTrigger(this.type, this.position)) {
+          result = true;
+      }
         currentPos = ENIGMA.letterToPosition(this.position);
         if (currentPos == 26) {
             currentPos = 1;
@@ -300,9 +309,7 @@ ENIGMA.Rotor = function (type)
             currentPos++;
         }
         this.position = ENIGMA.positionToLetter(currentPos);
-        if (ENIGMA.getRotorTrigger(this.type, this.position)) {
-
-        }
+        return result;
     };
 
     this.setPosition = function (position) {
@@ -333,3 +340,30 @@ ENIGMA.Rotor = function (type)
 };
 
 
+ENIGMA.M3Machine = function(rotor1, rotor2, rotor3, reflector) {
+  rotor1 = new ENIGMA.Rotor(rotor1);
+  rotor2 = new ENIGMA.Rotor(rotor2);
+  rotor3 = new ENIGMA.Rotor(rotor3);
+
+  this.setRotorsPosition = function(a, b, c) {
+    this.rotor1.setPosition(a);
+    this.rotor2.setPosition(b);
+    this.rotor3.setPosition(c);
+  }
+
+  this.encrypt = function(letter) {
+    if (this.rotor1.step()) {
+      if (this.rotor2.step()) {
+        this.rotor3.step();
+      }
+    }
+    l = this.rotor1.encrypt(letter);
+    l = this.rotor2.encrypt(l);
+    l = this.rotor3.encrypt(l);
+    l = ENIGMA.reflector(l);
+    l = this.rotor3.decrypt(l);
+    l = this.rotor2.decrypt(l);
+    l = this.rotor1.decrypt(l);
+    return l;
+  }
+}
