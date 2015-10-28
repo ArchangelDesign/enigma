@@ -14,7 +14,7 @@
 
 <script>
 
-    machine = ENIGMA.machine('I', 'II', 'III');
+    machine = new ENIGMA.M3Machine('I', 'II', 'III');
     machine.setRotorsPosition('A', 'A', 'A');
     l1 = machine.encrypt('A');
     l2 = machine.encrypt('A');

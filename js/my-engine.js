@@ -341,9 +341,9 @@ ENIGMA.Rotor = function (type)
 
 
 ENIGMA.M3Machine = function(rotor1, rotor2, rotor3, reflector) {
-  rotor1 = new ENIGMA.Rotor(rotor1);
-  rotor2 = new ENIGMA.Rotor(rotor2);
-  rotor3 = new ENIGMA.Rotor(rotor3);
+  this.rotor1 = new ENIGMA.Rotor(rotor1);
+  this.rotor2 = new ENIGMA.Rotor(rotor2);
+  this.rotor3 = new ENIGMA.Rotor(rotor3);
 
   this.setRotorsPosition = function(a, b, c) {
     this.rotor1.setPosition(a);
