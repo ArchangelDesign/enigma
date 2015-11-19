@@ -1,15 +1,53 @@
-.enigma-keyboard {
-    width:250px;
-    height:150px;
-
+.keyboard-wrapper {
+    width:450px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-
     -webkit-box-shadow: 0 0 3px 3px rgba(100,100,100,0.5);
     box-shadow: 0 0 3px 3px rgba(100,100,100,0.5);
 }
 
-.enigma-letter {
+.enigma-keyboard {
+
+}
+
+#r3-position,#r2-position, #r1-position {
     width:20px;
-    height:20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.enigma-keyboard td {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display:block;
+    float:left;
+    width:34px;
+    height:34px;
+}
+
+.enigma-letter {
+    width:30px;
+    height:30px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:2px;
+}
+
+#input-text {
+    width:600px;
+    height:300px;
+    -webkit-box-shadow: 0 0 5px 6px rgba(200,200,200,1);
+    box-shadow: 0 0 5px 6px rgba(200,200,200,1);
+}
+
+.wrapping-div {
+    width:650px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.second-row {
+    padding-left:10px;
 }

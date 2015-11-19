@@ -8,61 +8,134 @@
 </head>
 <body>
 
-<table class="enigma-keyboard">
-    <tr class="first-row">
-        <td><img class="enigma-letter" src="img/q.png"></td>
-        <td><img class="enigma-letter" src="img/w.png"></td>
-        <td><img class="enigma-letter" src="img/e.png"></td>
-        <td><img class="enigma-letter" src="img/r.png"></td>
-        <td><img class="enigma-letter" src="img/t.png"></td>
-        <td><img class="enigma-letter" src="img/z.png"></td>
-        <td><img class="enigma-letter" src="img/u.png"></td>
-        <td><img class="enigma-letter" src="img/i.png"></td>
-        <td><img class="enigma-letter" src="img/o.png"></td>
-    </tr>
+<input type="text" id="r3-position">
+<input type="text" id="r2-position">
+<input type="text" id="r1-position">
 
-    <tr class="second-row">
-        <td><img class="enigma-letter" src="img/a.png"></td>
-        <td><img class="enigma-letter" src="img/s.png"></td>
-        <td><img class="enigma-letter" src="img/d.png"></td>
-        <td><img class="enigma-letter" src="img/f.png"></td>
-        <td><img class="enigma-letter" src="img/g.png"></td>
-        <td><img class="enigma-letter" src="img/h.png"></td>
-        <td><img class="enigma-letter" src="img/j.png"></td>
-        <td><img class="enigma-letter" src="img/k.png"></td>
-    </tr>
+<div class="wrapping-div">
+    <div class="keyboard-wrapper">
+        <table class="enigma-keyboard">
+            <tr class="first-row">
+                <td id="key-81"><img class="enigma-letter" src="img/q.png"></td>
+                <td id="key-87"><img class="enigma-letter" src="img/w.png"></td>
+                <td id="key-69"><img class="enigma-letter" src="img/e.png"></td>
+                <td id="key-82"><img class="enigma-letter" src="img/r.png"></td>
+                <td id="key-84"><img class="enigma-letter" src="img/t.png"></td>
+                <td id="key-90"><img class="enigma-letter" src="img/z.png"></td>
+                <td id="key-85"><img class="enigma-letter" src="img/u.png"></td>
+                <td id="key-73"><img class="enigma-letter" src="img/i.png"></td>
+                <td id="key-79"><img class="enigma-letter" src="img/o.png"></td>
+            </tr>
+        </table>
 
-    <tr class="third-row">
-        <td><img class="enigma-letter" src="img/p.png"></td>
-        <td><img class="enigma-letter" src="img/y.png"></td>
-        <td><img class="enigma-letter" src="img/x.png"></td>
-        <td><img class="enigma-letter" src="img/c.png"></td>
-        <td><img class="enigma-letter" src="img/v.png"></td>
-        <td><img class="enigma-letter" src="img/b.png"></td>
-        <td><img class="enigma-letter" src="img/n.png"></td>
-        <td><img class="enigma-letter" src="img/m.png"></td>
-        <td><img class="enigma-letter" src="img/l.png"></td>
-    </tr>
-</table>
+        <table class="enigma-keyboard" style="margin-left:15px;">
+            <tr class="second-row">
+                <td id="key-65"><img class="enigma-letter" src="img/a.png"></td>
+                <td id="key-83"><img class="enigma-letter" src="img/s.png"></td>
+                <td id="key-68"><img class="enigma-letter" src="img/d.png"></td>
+                <td id="key-70"><img class="enigma-letter" src="img/f.png"></td>
+                <td id="key-71"><img class="enigma-letter" src="img/g.png"></td>
+                <td id="key-72"><img class="enigma-letter" src="img/h.png"></td>
+                <td id="key-74"><img class="enigma-letter" src="img/j.png"></td>
+                <td id="key-75"><img class="enigma-letter" src="img/k.png"></td>
+            </tr>
+        </table>
+
+        <table class="enigma-keyboard">
+            <tr class="third-row">
+                <td id="key-80"><img class="enigma-letter" src="img/p.png"></td>
+                <td id="key-89"><img class="enigma-letter" src="img/y.png"></td>
+                <td id="key-88"><img class="enigma-letter" src="img/x.png"></td>
+                <td id="key-67"><img class="enigma-letter" src="img/c.png"></td>
+                <td id="key-86"><img class="enigma-letter" src="img/v.png"></td>
+                <td id="key-66"><img class="enigma-letter" src="img/b.png"></td>
+                <td id="key-78"><img class="enigma-letter" src="img/n.png"></td>
+                <td id="key-77"><img class="enigma-letter" src="img/m.png"></td>
+                <td id="key-76"><img class="enigma-letter" src="img/l.png"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="wrapping-div">
+    <textarea id="input-text" READONLY></textarea>
+</div>
 
 </body>
 </html>
 
+
 <script src="js/my-engine.js"></script>
+<script src="js/jquery.min.js"></script>
 
 
 <script>
 
+    var pressingKey = false;
+
     machine = new ENIGMA.M3Machine('I', 'II', 'III');
     machine.setRotorsPosition('A', 'A', 'A');
-    l1 = machine.encrypt('A');
-    l2 = machine.encrypt('A');
-    l3 = machine.encrypt('A');
 
-    machine.setRotorsPosition('A', 'A', 'A');
-    d1 = machine.encrypt(l1);
-    d2 = machine.encrypt(l2);
-    d3 = machine.encrypt(l3);
+    function resetMachine(rotor1, rotor2, rotor3)
+    {
 
-    console.log(d1 + ' - ' + d2 + ' - ' + d3);
+    }
+
+    function processLetter(letter) {
+        return machine.encrypt(letter);
+    }
+
+    function updateRotors() {
+        $("#r1-position").val(machine.rotor1.position);
+        $("#r2-position").val(machine.rotor2.position);
+        $("#r3-position").val(machine.rotor3.position);
+    }
+
+    $('body').keydown(function(key) {
+        if (pressingKey) {
+            return;
+        }
+
+        char = String.fromCharCode(key.keyCode);
+        code = key.keyCode;
+        if (code < 65) {
+            return;
+        }
+        if (code > 90) {
+            return;
+        }
+        if (code == 32) {
+            return;
+        }
+        pressingKey = true;
+        lightupKey(code);
+        $("#input-text").append(processLetter(code));
+        updateRotors();
+    });
+
+    $('body').keyup(function(key) {
+        char = String.fromCharCode(key.keyCode);
+        code = key.keyCode;
+        if (code < 65) {
+            return;
+        }
+        if (code > 90) {
+            return;
+        }
+        if (code == 32) {
+            return;
+        }
+        pressingKey = false;
+        turnOffKey(code);
+    });
+
+    function lightupKey(key) {
+        var id = 'key-'+key;
+        $("#"+id).css('background-color', 'red');
+    }
+
+    function turnOffKey(key) {
+        var id = 'key-'+key;
+        $("#"+id).css('background-color', 'transparent');
+    }
 </script>
